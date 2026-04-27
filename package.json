@@ -1,6 +1,6 @@
 {
   "name": "hive-mcp-depin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server for the Hive DePIN provider marketplace. Operators of physical infrastructure (storage, compute, GPU, bandwidth, energy meters, sensors, wireless coverage) list their capacity with 22 stand",
   "type": "module",
   "main": "server.js",
