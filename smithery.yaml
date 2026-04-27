@@ -1,0 +1,133 @@
+# Smithery Registry — HiveDePIN MCP Server
+# https://smithery.ai
+
+startCommand:
+  type: http
+  configSchema:
+    type: object
+    properties: {}
+    required: []
+  url: https://hivemorph.onrender.com/mcp/hive-mcp-depin
+
+name: hive-mcp-depin
+displayName: HiveDePIN — Decentralized Physical Infrastructure marketplace for autonomous agents
+version: "1.0.0"
+description: >
+  MCP server for the Hive DePIN provider marketplace. Operators of physical infrastructure (storage, compute, GPU, bandwidth, energy meters, sensors, wireless coverage) list their capacity with 22 standardized metadata fields; agents discover and consume that capacity with USDC/USDT settlement on Base, Ethereum, or Solana. Match fee 0.15%. Real rails.
+
+author:
+  name: Steve Rotzin
+  email: steve@thehiveryiq.com
+  url: https://www.thehiveryiq.com
+
+license: MIT
+homepage: https://github.com/srotzin/hive-mcp-depin
+repository:
+  type: git
+  url: https://github.com/srotzin/hive-mcp-depin
+
+transport: streamable-http
+endpoint: https://hivemorph.onrender.com/mcp
+protocol: "2024-11-05"
+
+categories:
+  - depin
+  - agent-to-agent
+  - infrastructure
+  - marketplace
+  - web3
+  - defi
+
+tags:
+  - mcp
+  - hive
+  - depin
+  - ai-agents
+  - a2a
+  - usdc
+  - base-l2
+  - marketplace
+  - infrastructure
+
+tools:
+        - name: depin_list_providers
+  description: >
+    List DePIN provider listings. Filter by category (storage, compute, gpu, bandwidth, energy, sensor, wireless), region, or capacity. No auth required.
+  inputs:
+    - name: provider_category
+  type: string
+  required: false
+  description: "storage | compute | gpu | bandwidth | energy | sensor | wireless"
+- name: region
+  type: string
+  required: false
+  description: "Filter by region (e.g. us-east, eu-west)"
+- name: depin_create_listing
+  description: >
+    List physical infrastructure capacity (storage TB, compute cores, GPU VRAM, bandwidth Mbps, sensor sample rate, etc.). 22 metadata fields supported. Match fee 0.15%.
+  inputs:
+    - name: agent_id
+  type: string
+  required: true
+  description: "Operator agent ID"
+- name: provider_category
+  type: string
+  required: true
+  description: "storage | compute | gpu | bandwidth | energy | sensor | wireless"
+- name: unit_rate_usdc
+  type: number
+  required: true
+  description: "Price per unit in USDC"
+- name: unit_label
+  type: string
+  required: true
+  description: "Pricing unit, e.g. 'per TB-month', 'per GPU-hour'"
+- name: operator_did
+  type: string
+  required: true
+  description: "Operator DID for trust scoring"
+- name: payout_address
+  type: string
+  required: true
+  description: "Settlement address"
+- name: region
+  type: string
+  required: false
+  description: "Geographic region"
+- name: capacity_gb
+  type: number
+  required: false
+  description: "Capacity for storage providers (GB)"
+- name: throughput_mbps
+  type: number
+  required: false
+  description: "Throughput for bandwidth providers (Mbps)"
+- name: gpu_model
+  type: string
+  required: false
+  description: "GPU model for GPU providers"
+- name: vram_gb
+  type: number
+  required: false
+  description: "VRAM for GPU providers (GB)"
+- name: kind
+  type: string
+  required: false
+  description: "Listing kind (default: depin_provider)"
+- name: depin_get_match_fee
+  description: >
+    Get the current DePIN marketplace match fee (currently 0.15%). Returned alongside settlement currencies and chains.
+  inputs:
+    []
+
+runtime:
+  type: node
+  version: ">=18"
+  command: node server.js
+  env:
+    - name: PORT
+      default: "3000"
+      required: false
+    - name: HIVE_BASE
+      default: "https://hivemorph.onrender.com"
+      required: false

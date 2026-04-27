@@ -1,0 +1,38 @@
+{
+  "name": "hive-mcp-depin",
+  "version": "1.0.0",
+  "description": "MCP server for the Hive DePIN provider marketplace. Operators of physical infrastructure (storage, compute, GPU, bandwidth, energy meters, sensors, wireless coverage) list their capacity with 22 stand",
+  "type": "module",
+  "main": "server.js",
+  "bin": {
+    "hive-mcp-depin": "./server.js"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "mcp",
+    "hive",
+    "depin",
+    "ai-agents",
+    "a2a",
+    "usdc",
+    "base-l2",
+    "marketplace",
+    "infrastructure"
+  ],
+  "author": "Steve Rotzin <steve@thehiveryiq.com> (https://www.thehiveryiq.com)",
+  "license": "MIT",
+  "homepage": "https://github.com/srotzin/hive-mcp-depin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/srotzin/hive-mcp-depin"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
