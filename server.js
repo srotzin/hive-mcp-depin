@@ -9,6 +9,7 @@
  */
 
 import express from 'express';
+import { renderLanding, renderRobots, renderSitemap, renderSecurity, renderOgImage, seoJson, BRAND_GOLD } from './meta.js';
 
 const app = express();
 app.use(express.json());
@@ -61,6 +62,24 @@ properties: {
 }
 ];
 
+
+const SERVICE_CFG = {
+  service: "hive-mcp-depin",
+  shortName: "HiveDePIN",
+  title: "HiveDePIN \u00b7 Decentralized Physical Infrastructure Marketplace MCP",
+  tagline: "DePIN provider marketplace \u2014 storage, compute, GPU, bandwidth, sensors, wireless.",
+  description: "MCP server for HiveDePIN \u2014 decentralized physical infrastructure marketplace. Operators list capacity (storage, compute, GPU, bandwidth, energy meters, sensors, wireless coverage) with 22 standardized metadata fields. Match fee 0.15%. USDC/USDT settlement on Base, Ethereum, or Solana. Real rails.",
+  keywords: ["mcp", "model-context-protocol", "x402", "agentic", "ai-agent", "ai-agents", "llm", "hive", "hive-civilization", "depin", "decentralized-physical-infrastructure", "marketplace", "usdc", "base", "base-l2", "ethereum", "solana", "a2a"],
+  externalUrl: "https://hive-mcp-gateway.onrender.com/depin",
+  gatewayMount: "/depin",
+  version: "1.0.2",
+  pricing: [
+    { name: "depin_list_providers", priceUsd: 0, label: "List providers \u2014 free" },
+    { name: "depin_match", priceUsd: 0.005, label: "Match (Tier 2)" },
+    { name: "depin_settle", priceUsd: 0.05, label: "Settle (Tier 3, 0.15% match fee)" }
+  ],
+};
+SERVICE_CFG.tools = (typeof TOOLS !== 'undefined' ? TOOLS : (typeof MCP_TOOLS !== 'undefined' ? MCP_TOOLS : [])).map(t => ({ name: t.name, description: t.description }));
 // ─── HTTP helpers ────────────────────────────────────────────────────────────
 async function hiveGet(path, params = {}) {
   const url = new URL(`${HIVE_BASE}${path.startsWith('/') ? path : '/' + path}`);
@@ -154,6 +173,24 @@ app.get('/.well-known/mcp.json', (req, res) => res.json({
   tools: TOOLS.map(t => ({ name: t.name, description: t.description })),
 }));
 
+
+// HIVE_META_BLOCK_v1 — comprehensive meta tags + JSON-LD + crawler discovery
+app.get('/', (req, res) => {
+  res.type('text/html; charset=utf-8').send(renderLanding(SERVICE_CFG));
+});
+app.get('/og.svg', (req, res) => {
+  res.type('image/svg+xml').send(renderOgImage(SERVICE_CFG));
+});
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain').send(renderRobots(SERVICE_CFG));
+});
+app.get('/sitemap.xml', (req, res) => {
+  res.type('application/xml').send(renderSitemap(SERVICE_CFG));
+});
+app.get('/.well-known/security.txt', (req, res) => {
+  res.type('text/plain').send(renderSecurity());
+});
+app.get('/seo.json', (req, res) => res.json(seoJson(SERVICE_CFG)));
 app.listen(PORT, () => {
   console.log(`HiveDePIN MCP Server running on :${PORT}`);
   console.log(`  Backend : ${HIVE_BASE}`);
