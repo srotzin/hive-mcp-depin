@@ -86,7 +86,7 @@ const SERVICE_CFG = {
   tagline: "DePIN provider marketplace \u2014 storage, compute, GPU, bandwidth, sensors, wireless.",
   description: "MCP server for HiveDePIN \u2014 decentralized physical infrastructure marketplace. Operators list capacity (storage, compute, GPU, bandwidth, energy meters, sensors, wireless coverage) with 22 standardized metadata fields. Match fee 0.15%. USDC/USDT settlement on Base, Ethereum, or Solana. Real rails.",
   keywords: ["mcp", "model-context-protocol", "x402", "agentic", "ai-agent", "ai-agents", "llm", "hive", "hive-civilization", "depin", "decentralized-physical-infrastructure", "marketplace", "usdc", "base", "base-l2", "ethereum", "solana", "a2a"],
-  externalUrl: "https://hive-mcp-gateway.onrender.com/depin",
+  externalUrl: "https://hive-mcp-depin.onrender.com",
   gatewayMount: "/depin",
   version: "1.0.2",
   pricing: [
