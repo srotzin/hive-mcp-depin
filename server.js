@@ -238,6 +238,11 @@ app.get('/agent.html', (req, res) => {
 });
 
 
+// ─── Schema constants (auto-injected to fix deploy) ─────
+const SERVICE = 'hive-mcp-depin';
+const VERSION = '1.0.3';
+
+
 // ─── Schema discoverability ────────────────────────────────────────────────
 const AGENT_CARD = {
   name: SERVICE,
